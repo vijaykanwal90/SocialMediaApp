@@ -1,51 +1,54 @@
 import mongoose , {Schema} from 'mongoose';
-import { Jwt } from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
+// import { Jwt } from 'jsonwebtoken';
+// import bcrypt from 'bcrypt';
 
 
 const userSchema = new Schema ({
 
     firstname:{
         type: String,
-        require:true,
+        required:true,
         lowercase : true,
         trim : true,
         min:2,
-        max:8,
+        max:50,
         index: true
     },
     lastname:{
         type:String,
-        require:true,
+        required:true,
         lowercase:true,
         min:2,
-        max:8,
+        max:50,
         trim:true
 
     },
     friends:{
-        type:Array
+        type:Array,
+        default:[],
 
     },
     email:{
         type:String,
-        require:true,
+        required:true,
         unique:true,
         lowercase:true,
+        max:50,
         trim:true
     },
     password:{
         type:String,
-        require:true,
+        required:true,
         trim:true,
         min:2,
     },
     picturePath:{
-
+        type:String,
+        default:"",
     },
     location:{
         type:String,
-        require:true,
+        required:true,
         lowercase:true,
         trim:true
     },
@@ -66,4 +69,5 @@ const userSchema = new Schema ({
 
 },{timestamps:true})
 
-export const User = mongoose.model('User',userSchema);
+ const User = mongoose.model('User',userSchema);
+ export default User;
