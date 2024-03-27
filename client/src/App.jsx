@@ -28,7 +28,6 @@ const theme = useMemo(()=>createTheme(themeSettings(mode)),[mode]);
       </Routes>
       </ThemeProvider>
       </BrowserRouter>
-      <div>hello world</div>
       
     </div>
   )
