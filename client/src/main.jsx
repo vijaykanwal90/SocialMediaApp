@@ -4,11 +4,11 @@ import App from './App.jsx'
 import './index.css'
 import { configureStore } from '@reduxjs/toolkit'
 import {Provider} from "react-redux"
-import authReducer from "./store"
-import {persistStore,persistReducer, FLUSH,REHYDRATE,PAUSE,PERSIS,PURGE,REGISTER} from "redux-persist"
+import authReducer from "./store/store"
+import {persistStore,persistReducer, FLUSH,REHYDRATE,PAUSE,PERSIST,PURGE,REGISTER} from "redux-persist"
 import storage from "redux-persist/lib/storage";
 import {PersistGate} from "redux-persist/integration/react"
-import { buildGetDefaultMiddleware } from '@reduxjs/toolkit/dist/getDefaultMiddleware.js'
+// import { getDefaultMiddleware } from '@reduxjs/toolkit/dist/getDefaultMiddleware'
 
 
 const persistConfig = {key:"root", storage, version:1}
@@ -18,7 +18,7 @@ const store = configureStore({
   middleware:(getDefaultMiddleware)=>
   getDefaultMiddleware({
     serializableCheck:{
-      ignoreActions:[FLUSH,REHYDRATE,PAUSE,PERSIS,PURGE,REGISTER],
+      ignoreActions:[FLUSH,REHYDRATE,PAUSE,PERSIST,PURGE,REGISTER],
     },
   }),
 });
