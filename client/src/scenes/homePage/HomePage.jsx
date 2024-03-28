@@ -4,6 +4,7 @@ import Navbar from '../navbar/Navbar'
 const HomePage = () => {
   return (
     <Box>
+
       <Navbar/>
     </Box>
   )

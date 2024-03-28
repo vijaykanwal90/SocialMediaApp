@@ -71,8 +71,8 @@ mongoose.connect(process.env.MONGO_URL,{
 }).then(()=>{
 app.listen(PORT,()=> console.log(`Server Port:${PORT}`));
 // add data one time if i restrarts this this will add duplicate data
-User.insertMany(users);
-Post.insertMany(posts)
+// User.insertMany(users);
+// Post.insertMany(posts)
 
 
 }).catch((error)=>
