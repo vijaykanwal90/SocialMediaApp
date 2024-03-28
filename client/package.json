@@ -14,6 +14,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.15.14",
     "@mui/material": "^5.15.14",
+    "@mui/styled-engine": "^5.15.14",
     "@reduxjs/toolkit": "^2.2.2",
     "dotenv": "^16.4.5",
     "formik": "^2.4.5",

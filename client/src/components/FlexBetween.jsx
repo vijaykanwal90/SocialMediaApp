@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box } from '@mui/material'
-import styled, { StyledComponent } from '@emotion/styled'
+import styled  from '@mui/styled-engine'
 
 const FlexBetween = styled(Box)( {
 display:"flex",

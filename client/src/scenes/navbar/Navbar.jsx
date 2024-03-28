@@ -23,8 +23,8 @@ import {
 } from "@mui/icons-material";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setMode, setLogout } from "state";
-import FlexBetween from 'components/FlexBetween';
+import { setMode, setLogout } from "../../app/store.js";
+import FlexBetween from '../../components/FlexBetween.jsx';
 const Navbar = () => {
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false)
   const dispatch = useDispatch()

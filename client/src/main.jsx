@@ -5,7 +5,7 @@ import './index.css'
 import { configureStore } from '@reduxjs/toolkit';
 // import { GetDefaultMiddleware } from '@reduxjs/toolkit/dist/getDefaultMiddleware.js';
 import {Provider} from "react-redux"
-import authReducer from "./store/store"
+import authReducer from "./app/store.js"
 import {persistStore,persistReducer, FLUSH,REHYDRATE,PAUSE,PERSIST,PURGE,REGISTER} from "redux-persist"
 import storage from "redux-persist/lib/storage";
 // import { GetDefaultMiddleware } from '@reduxjs/toolkit/dist/getDefaultMiddleware.js'
