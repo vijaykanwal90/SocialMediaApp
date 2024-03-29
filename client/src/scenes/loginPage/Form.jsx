@@ -9,20 +9,21 @@ import {
 
 
 } from "@mui/material"
-import EditOutlinedIcon from "@mui/icons-material/EditOUtlined"
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined"
 import { Formik } from "formik"
 import * as yup from "yup"
 import { useNavigate } from 'react-router-dom'
-import { UseDispatch, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setLogin } from "../../app/store"
 import Dropzone from "react-dropzone"
 import FlexBetween from '../../components/FlexBetween'
+// import { blue } from '@mui/material/colors'
 
 const registerSchema = yup.object().shape({
   firstName: yup.string().required("required"),
   lastName: yup.string().required("required"),
   email: yup.string().email("invalid email").required("required"),
-  password: yup.string().equired("required"),
+  password: yup.string().required("required"),
   location: yup.string().required("required"),
   occupation: yup.string().required("required"),
   picture: yup.string().required("required"),
@@ -30,7 +31,7 @@ const registerSchema = yup.object().shape({
 
 const loginSchema = yup.object().shape({
   email: yup.string().email("invalid email").required("required"),
-  password: yup.string().equired("required"),
+  password: yup.string().required("required"),
 
 })
 const initialValuesRegister = {
@@ -43,7 +44,7 @@ const initialValuesRegister = {
   picture: "",
 
 }
-const initiValuesLogin = {
+const initialValuesLogin = {
   email: "",
   password: "",
 };
@@ -57,67 +58,86 @@ const Form = () => {
   const isLogin = pageType === "login";
   const isRegister = pageType === "register";
 
-  const register = async (values,onsubmitProps)=>{
+  const register = async (values, onsubmitProps) => {
     // this allow us to send form info with image
     const formData = new FormData();
-    for( let value in values){
-      formData.append(value,values[value])
+    for (let value in values) {
+      formData.append(value, values[value])
     }
-    formData.append('picturePath',values.picture.name);
+    formData.append('picturePath', values.picture.name);
     const savedUserResponse = await fetch(
-      "http://localhost:3001/auth/register",
+      "http://localhost:3006/auth/register",
       {
-        method:"POST",
-        body:formData,
+        method: "POST",
+        body: formData,
       }
     );
     const savedUser = await savedUserResponse.json();
     onsubmitProps.resetForm();
-    
-    if(savedUser){
+
+    if (savedUser) {
       setPageType("login");
     }
   };
 
-  const login = async (values, onsubmitProps)=>{
+  const login = async (values, onsubmitProps) => {
     const loggedInResponse = await fetch(
-      "http://localhost:3001/auth/login",
+      "http://localhost:3006/auth/login",
       {
-        method:"POST",
-        body:formData,
+        method: "POST",
+        headers: { "content-Type": "application/json" },
+
+        body: JSON.stringify(values),
       }
     )
-
+    const loggedIn = await loggedInResponse.json();
+    onsubmitProps.resetForm();
+    if (loggedIn) {
+      dispatch(
+        setLogin({
+          user: loggedIn.user,
+          token: loggedIn.token,
+        })
+      );
+      navigate("/home");
+    }
   }
 
-  const handleFormSubmit = async (values, onsubmitProps) => { 
-   if(isLogin ) await login(values, onsubmitProps);
-   if(isRegister) await register(values,onsubmitProps)
+  const handleFormSubmit = async (values, onsubmitProps) => {
+    if (isLogin) await login(values, onsubmitProps);
+    if (isRegister) await register(values, onsubmitProps);
 
   };
 
   return (
-    <Formik onSubmit={handleFormSubmit} initialValues={isLogin ? initiValuesLogin : initialValuesRegister}
+  
+   
+    
+    <Formik onSubmit={handleFormSubmit} initialValues={isLogin ? initialValuesLogin : initialValuesRegister}
       validationSchema={isLogin ? loginSchema : registerSchema}>
       {({
         values,
         errors,
         touched,
+        handleBlur,
         handleChange,
         handleSubmit,
         setFieldValue,
         resetForm,
-      }) => {
+      }) => (
         <form onSubmit={handleSubmit}>
-          <box display="grid"
+          <Box display="grid"
             gap="30px"
             gridTemplateColumns="repeat(4,minmax(0,1fr))"
             sx={{
               "&>div": { gridColumn: isNonMobile ? undefined : "span 4" },
             }}
           >
+                 
+            {/* <Typography>Hellow orkd</Typography> */}
             {isRegister && (
               <>
+         
                 <TextField
                   label="First Name"
                   onBlur={handleBlur}
@@ -158,18 +178,19 @@ const Form = () => {
                   helperText={touched.occupation && errors.occupation}
                   sx={{ gridColumn: "span 4" }}
                 />
-                <Box gridColumn="span 4"
+                <Box gridColumn="span 4" 
                   border={`1px solid ${palette.neutral.medium}`}
                   borderRadius="5px"
                   p="1rem"
                 >
-                  <Dropzone acceptedFiles=".jpeg,.jpeg,.png"
-                    multiple={files}
+                  <Dropzone 
+                  acceptedFiles=".jpeg,.jpeg,.png"
+                    multiple={false}
                     onDrop={(acceptedFiles) =>
                       setFieldValue("picture", acceptedFiles[0])
                     }>
                     {({ getRootProps, getInputProps }) => (
-                      <Box
+                      <Box 
                         {...getRootProps()}
                         border={`2px dashed ${palette.primary.main}`}
                         p="1rem"
@@ -185,13 +206,13 @@ const Form = () => {
                           </FlexBetween>
                         )
                         }
-                      </Box>
+                      </Box> 
                     )}
                   </Dropzone>
-                </Box>
+                </Box> 
               </>
             )}
-
+            {/* register form input ends here */}
             <TextField
               label="Email"
               onBlur={handleBlur}
@@ -203,7 +224,7 @@ const Form = () => {
               sx={{ gridColumn: "span 4" }}
             />
             <TextField
-              label="Paspassword"
+              label="Passsword"
               onBlur={handleBlur}
               type="password"
               onChange={handleChange}
@@ -214,45 +235,47 @@ const Form = () => {
               sx={{ gridColumn: "span 4" }}
             />
 
-          </box>
+          </Box>
 
           {/* button section  */}
-          <Box>
-            <button 
+<Box>
+          <Button
             fullWidth
             type="submit"
             sx={{
-              m:"2rem 0",
-              p:"1rem ",
-              backgroundColor:palette.primary.main,
-              color:palette.background.alt,
-              "&:hover":{color:palette.primary.main},
+              m: "2rem 0",
+              p: "1rem ",
+              backgroundColor: palette.primary.main,
+              color: palette.background.alt,
+              "&:hover": { color: palette.primary.main },
             }}
-            >
-              {isLogin ? "Login":"Register"}
-            </button>
-            <Typography
-            onClick={()=>{
-              setPageType(isLogin ? "register":"login");
+          >
+            {isLogin ? "LOGIN" : "REGISTER"}
+          </Button>
+          <Typography
+            onClick={() => {
+              setPageType(isLogin ? "register" : "login");
               resetForm();
             }}
             sx={{
-              textDecoration:"underline",
-              color:palette.primary.main,
-              "&:hover":{
-                coursor:"pointer",
-                color:palette.primary.light,
+              textDecoration: "underline",
+              color: palette.primary.main,
+              "&:hover": {
+                coursor: "pointer",
+                color: palette.primary.dark,
               },
             }}
-            >
-              {isLogin ?"Don't have an account? Sign Up here."
-              :"Already have an account? Login here."}
-            </Typography>
-          </Box>
-        </form>
-      }}
-    </Formik>
-  )
-}
+          >
+            {isLogin ? "Don't have an account? Sign Up here."
+              : "Already have an account? Login here."}
+          </Typography>
+        </Box>
+          
+        </form >
+      )}
+    </Formik >
+    
+  );
+};
 
 export default Form

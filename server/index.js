@@ -69,7 +69,7 @@ mongoose.connect(process.env.MONGO_URL,{
     useNewUrlParser:true,
     useUnifiedTopology:true,
 }).then(()=>{
-app.listen(PORT,()=> console.log(`Server Port:${PORT}`));
+app.listen(PORT,()=> console.log(`Server Port:${PORT} + " it is port section "`));
 // add data one time if i restrarts this this will add duplicate data
 // User.insertMany(users);
 // Post.insertMany(posts)

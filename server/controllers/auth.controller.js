@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt"
-import Jwt from "jsonwebtoken"
+import jwt from "jsonwebtoken"
 import User from "../models/user.model.js";
 
 
@@ -36,7 +36,7 @@ export const register = async (req,res)=>{
         res.status(201).json(savedUser);
 
     } catch (error) {
-        res.status(500),json({error: error.message});
+        res.status(500),json({error: error.message + "in the auth.controller"});
     }
 }
 
