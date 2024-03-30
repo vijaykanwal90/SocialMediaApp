@@ -32,10 +32,13 @@ const app = express();
 app.use(express.json());
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({policy:"cross-origin"}));
-app.use(morgan("comman"));
+app.use(morgan("command"));
 app.use(bodyParser.json({limit:"30mb",extended:true}));
 app.use(bodyParser.urlencoded({limit:"30mb",extended:true}));
-app.use(cors());
+app.use(cors({
+    origin:process.env.CORS_ORIGIN,
+    credentials:true
+}));
 app.use("/assets",express.static(path.join(__dirname,'public/assets')));
 
 
@@ -55,7 +58,7 @@ const upload = multer({storage})
 
 
 // routes with files
-app.post("auth/register",upload.single("picture"),register)
+app.post("/auth/register",upload.single("picture"),register)
 app.post("/posts",verifyToken,upload.single("picture"),createPost);
 
 // routes
@@ -63,17 +66,19 @@ app.use("/auth",authRoutes)
 app.use("/users",userRoutes)
 app.use("/posts",postRoutes)
 // set up of mongoose
+// http://localhost:3050/api/v1
 
-const PORT = process.env.PORT || 6001;
+const PORT = process.env.PORT || 8000;
+console.log(PORT)
 mongoose.connect(process.env.MONGO_URL,{
     useNewUrlParser:true,
     useUnifiedTopology:true,
 }).then(()=>{
-app.listen(PORT,()=> console.log(`Server Port:${PORT} + " it is port section "`));
-// add data one time if i restrarts this this will add duplicate data
-// User.insertMany(users);
-// Post.insertMany(posts)
-
-
-}).catch((error)=>
-console.log(`${error} did not connect`));
+    app.listen(process.env.PORT || 8000,()=>{
+        console.log(PORT)
+        console.log(`Server is running at port:${process.env.PORT}`);
+    })
+})
+.catch((error)=>{
+    console.log("MongoDB connection failed ||", err);
+})

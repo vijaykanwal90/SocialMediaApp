@@ -60,20 +60,27 @@ const Form = () => {
 
   const register = async (values, onsubmitProps) => {
     // this allow us to send form info with image
+    console.log("in register section ")
     const formData = new FormData();
     for (let value in values) {
       formData.append(value, values[value])
     }
     formData.append('picturePath', values.picture.name);
+    console.log("above savedUserresponse section ")
+    console.log(formData.name)
+
     const savedUserResponse = await fetch(
-      "http://localhost:3006/auth/register",
+      "http://localhost:8000/auth/register",
       {
         method: "POST",
         body: formData,
       }
     );
+   
     const savedUser = await savedUserResponse.json();
+   
     onsubmitProps.resetForm();
+    console.log(savedUserResponse);
 
     if (savedUser) {
       setPageType("login");
@@ -82,7 +89,7 @@ const Form = () => {
 
   const login = async (values, onsubmitProps) => {
     const loggedInResponse = await fetch(
-      "http://localhost:3006/auth/login",
+      "http://localhost:8000/auth/login",
       {
         method: "POST",
         headers: { "content-Type": "application/json" },
