@@ -65,8 +65,7 @@ app.post("/posts",verifyToken,upload.single("picture"),createPost);
 app.use("/auth",authRoutes)
 app.use("/users",userRoutes)
 app.use("/posts",postRoutes)
-// set up of mongoose
-// http://localhost:3050/api/v1
+// set up of mongoses
 
 const PORT = process.env.PORT || 8000;
 console.log(PORT)
