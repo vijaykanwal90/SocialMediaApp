@@ -1,11 +1,19 @@
 import User from "../models/user.model.js"
 
 // read operations
-
+console.log("here")
 export const getUser = async(req,res)=>{
     try {
+        console.log("in get user")
+        
         const {id} = req.params;
+        // if(!id){
+        //     console.log("id not found");
+        //     return res.status(400).json({ message: "ID parameter is missing" });
+        // }
+        console.log(id)
         const user= await User.findById(id);
+        console.log(user)
         res.status(200).json(user);
     } catch (error) {
         res.status(404).json({message: error.message + "error in getUser"})
