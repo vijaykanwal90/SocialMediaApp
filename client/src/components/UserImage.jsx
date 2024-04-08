@@ -8,7 +8,7 @@ const UserImage = ({image, size="60px"})=>{
         borderRadius:"50%"}}
         width={size}
         height={size}
-        src={`http://localhost:8000/assets/${image}`}
+        src={`http://localhost:5152/assets/${image}`}
         />
         </Box>
     )
