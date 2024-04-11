@@ -63,7 +63,76 @@ const MyPostWidget = ({picturePath}) => {
     <WidgetWrapper>
 <FlexBetween>
     <UserImage image={picturePath}/>
+    <inputBase 
+        placeholder="what's on your mind..."
+        onChange = {(e) =>setPost(e.target.value)}
+        value={post}
+        sx={{
+
+            width:"100%",
+            backgroundColor:palette.neutral.light,
+            borderRadius:"2rem",
+            padding:"1 rem 2 rem"
+        }}
+    />
 </FlexBetween>
+{isImage && (
+        <Box
+        borderRadius="5px"
+        border={`1px solid ${medium}`}
+        mt="1rem"
+        p="1rem"
+        >
+            <DropZone
+            acceptedFiles=".jpeg,.jpeg,.png"
+            multiple={false}
+            onDrop={(acceptedFiles) =>
+              setImage( acceptedFiles[0])
+            }>
+            {({ getRootProps, getInputProps }) => (
+                <FlexBetween>
+              <Box 
+                {...getRootProps()}
+                border={`2px dashed ${palette.primary.main}`}
+                p="1rem"
+                width="100%"
+                sx={{ "&:hover": { cursor: "pointer" } }}
+              >
+                <input {...getInputProps()} />
+                {!image ? (
+                  <p>Add image here</p>
+                ) : (
+                  <FlexBetween>
+                    <Typography>{image.name}</Typography>
+                    <EditOutlined />
+                  </FlexBetween>
+                )
+                }
+              </Box> 
+              {image && (
+                <IconButton
+                 onClick={()=>setImage(null)}
+                 sx={{width:"15%"}}
+                >
+                    <DeletOutlined/>
+
+                </IconButton>
+              )}
+              </FlexBetween>
+            )}
+
+            </DropZone>
+        </Box>
+)}
+<Divider sx={{margin:"1.25rem 0"}}/>
+<FlexBetween
+  
+>
+    <FlexBetween gap="0.25rem " onClick={()=>setIsImage(!isImage)}>
+        <ImageOutlined sx={{}}/>
+    </FlexBetween>
+</FlexBetween>
+
     </WidgetWrapper>
   )
 }
