@@ -1,13 +1,13 @@
 import React from 'react'
 import {
     EditOutlined,
-    DeletOutlined,
+    DeleteOutlined,
     AttachFileOutlined,
     GifBoxOutlined,
     ImageOutlined,
     MicOutlined,
     MoreHorizOutlined,
-    PaletteTwoTone
+    
 } from "@mui/icons-material"
 import {
     Box, 
@@ -21,7 +21,7 @@ import {
 
 } from "@mui/material"
 import DropZone from "react-dropzone"
-import userImage from "../../components/userImage"
+
 import WidgetWrapper from '../../components/WidgetWrapper'
 import { useState } from 'react'
 import {useDispatch, useSelector} from "react-redux"
@@ -63,7 +63,7 @@ const MyPostWidget = ({picturePath}) => {
     <WidgetWrapper>
 <FlexBetween>
     <UserImage image={picturePath}/>
-    <inputBase 
+    <InputBase 
         placeholder="what's on your mind..."
         onChange = {(e) =>setPost(e.target.value)}
         value={post}
@@ -114,7 +114,7 @@ const MyPostWidget = ({picturePath}) => {
                  onClick={()=>setImage(null)}
                  sx={{width:"15%"}}
                 >
-                    <DeletOutlined/>
+                    <DeleteOutlined/>
 
                 </IconButton>
               )}
@@ -129,8 +129,43 @@ const MyPostWidget = ({picturePath}) => {
   
 >
     <FlexBetween gap="0.25rem " onClick={()=>setIsImage(!isImage)}>
-        <ImageOutlined sx={{}}/>
+        <ImageOutlined sx={{color:mediumMain}}/>
+        <Typography
+         color={mediumMain}
+         sx={{"&hover":{cursor:"pointer",color:medium}}}
+        >
+          Image
+        </Typography>
     </FlexBetween>
+    {isNonMobileScreens?(
+<>
+<FlexBetween gap="0.5rem">
+  <GifBoxOutlined sx={{color:mediumMain}}/>
+  <Typography color={mediumMain}>Clips</Typography>
+</FlexBetween>
+<FlexBetween gap="0.5rem">
+  <AttachFileOutlined sx={{color:mediumMain}}/>
+  <Typography color={mediumMain}>Attachemnt</Typography>
+</FlexBetween>
+<FlexBetween gap="0.5rem">
+  <MicOutlined sx={{color:mediumMain}}/>
+  <Typography color={mediumMain}>Audio</Typography>
+</FlexBetween>
+
+</>
+    ):(<FlexBetween gap="0.25rem">
+      <MoreHorizOutlined sx={{color:mediumMain}}/>
+      </FlexBetween>)}
+      <Button 
+      disabled={!post}
+      onClick={handlePost}
+      sx={{
+        color:palette.background.alt,
+        backgroundColor:palette.primary.main,
+        borderRadius:"3rem"
+      }}>
+        Post
+      </Button>
 </FlexBetween>
 
     </WidgetWrapper>
