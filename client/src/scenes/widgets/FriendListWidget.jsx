@@ -13,10 +13,12 @@ const {_id} = useSelector((state)=>state.user);
 const token = useSelector((state)=>state.token)
 const friends = useSelector((state)=>state.user.friends);
 const getFriends = async()=>{
-    const response= await fetch(`http://localhost:5152/${userId}/friends`,{
+  
+    const response= await fetch(`http://localhost:5152/users/${userId}/friends`,{
         method:"GET",
         headers:{Authorization:`Bearer ${token}`},
     });
+    console.log(response)
     const data = await response.json();
     dispatch(setFriends({friends:data}));
 }
@@ -32,8 +34,11 @@ useEffect(()=>{
       sx={{mb:"1.5rem"}}>
         Friend List
       </Typography>
+      {friends && friends.length>0 ?(
+
+      
       <Box display="flex "flexDirection="column" gap="1.5rem">
-{friends.map((friend)=>(
+      { friends.map((friend)=>(
     <Friend
     key={friend._id}
     friendId={friend._id}
@@ -43,9 +48,25 @@ useEffect(()=>{
 )
 
 )}
-      </Box>
+        </Box>
+      ):(
+        <Typography variant="body2" color="text.secondary">
+    Loading friends...
+  </Typography>
+      )
+        
+
+    }
     </WidgetWrapper>
   )
 }
 
 export default FriendListWidget
+
+// {friends && friends.length > 0 ? (
+//   <Box display="flex "flexDirection="column" gap="1.5rem">
+//     {/* Map over friends here */}
+//   </Box>
+// ) : (
+
+

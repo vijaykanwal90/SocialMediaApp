@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useEffect } from 'react'
 import {useDispatch,useSelector} from "react-redux"
 import MyPostWidget from './MyPostWidget'
+import PostWidget from './PostWidget'
 import { setPosts } from '../../app/store'
 const PostsWidget = ({userId,isProfile =false}) => {
     const dispatch=useDispatch();
@@ -14,6 +15,7 @@ const PostsWidget = ({userId,isProfile =false}) => {
     });
     
         const data= await response.json();
+        console.log(data);
         dispatch(setPosts({posts:data}));
     }
     const getUserPosts = async()=>{
@@ -23,9 +25,10 @@ const PostsWidget = ({userId,isProfile =false}) => {
     });
     
         const data= await response.json();
+        console.log(data)
         dispatch(setPosts({posts:data}));
     }
-    useInsertionEffect(()=>{
+    useEffect(()=>{
         if(isProfile){
             getUserPosts();
         }

@@ -12,7 +12,7 @@ const router = express.Router();
 // read routes
 
 router.get("/:id",verifyToken, getUser);
-router.get("/:id/friends",verifyToken,getUserFriends)
+router.get("/:id/friends",verifyToken,getUserFriends);
 
 // update 
 
