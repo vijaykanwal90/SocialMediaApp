@@ -27,7 +27,7 @@ const PostWidget = ({
     const dispatch = useDispatch();
     const token = useSelector((state) => state.token);
     const loggedInUserId = useSelector((state) => state.user._id);
-    // console.log(loggedInUserId)
+    console.log(loggedInUserId)
     const isLiked = Boolean(likes[loggedInUserId]);
     // if(isLiked){
     //     console.log("here is the error in isLiked")

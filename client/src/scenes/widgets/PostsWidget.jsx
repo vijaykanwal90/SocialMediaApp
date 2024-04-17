@@ -48,7 +48,7 @@ const PostsWidget = ({userId,isProfile =false}) => {
             getPosts();
         }
 
-    },[]);
+    },[]); 
   return (
    <>
    {/* { posts ?( posts.map(
@@ -86,8 +86,8 @@ const PostsWidget = ({userId,isProfile =false}) => {
    )} 
     */}
 
-{Array.isArray(posts) ? (
-            posts.map(({ _id, userId, firstName, lastName, description, location, picturePath, likes, userPicturePath, comments }) => (
+{/* 
+          {posts.map(({ _id, userId, firstName, lastName, description, location, picturePath, likes, userPicturePath, comments }) => (
                 <PostWidget
                     key={_id}
                     postId={_id}
@@ -101,9 +101,35 @@ const PostsWidget = ({userId,isProfile =false}) => {
                     comments={comments}
                 />
             ))
-        ) : (
-            <Box>No posts available</Box>
-        )}
+        } */}
+              {posts.map(
+        ({
+          _id,
+          userId,
+          firstName,
+          lastName,
+          description,
+          location,
+          picturePath,
+          userPicturePath,
+          likes,
+          comments,
+        }) => (
+          <PostWidget
+            key={_id}
+            postId={_id}
+            postUserId={userId}
+            name={`${firstName} ${lastName}`}
+            description={description}
+            location={location}
+            picturePath={picturePath}
+            userPicturePath={userPicturePath}
+            likes={likes}
+            comments={comments}
+          />
+        )
+      )}
+
    </>
   );
 };

@@ -51,7 +51,7 @@ useEffect(()=>{
         </Box>
       ):(
         <Typography variant="body2" color="text.secondary">
-    Loading friends...
+  No Friends...
   </Typography>
       )
         

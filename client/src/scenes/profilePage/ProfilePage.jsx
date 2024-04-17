@@ -5,26 +5,29 @@ import {useParams} from "react-router-dom";
 import Navbar from '../navbar/Navbar';
 import FriendListWidget from '../widgets/FriendListWidget';
 import MyPostWidget from '../widgets/MyPostWidget';
-import PostsWidget from '../widgets/PostWidget';
+import PostsWidget from '../widgets/PostsWidget';
 import UserWidget from '../widgets/UserWidget';
 
 const ProfilePage = () => {
   const [user,setUser] = useState(null);
   const {userId} = useParams();
-  const token = useSelector((state)=>state.token)
+  const token = useSelector((state)=>state.token);
   const isNonMobileScreens = useMediaQuery("(min-width:1000px")
   const getUser= async()=>{
     const response = await fetch(`http://localhost:5152/users/${userId}`,{
       method:"GET",
-      headers:{Authorization:`Bearer ${token}`}
+      headers:{
+        Authorization:`Bearer ${token}`
+      }
     })
     const data=await response.json();
+    console.log(data)
     setUser(data);
 
   }
   useEffect(()=>{
 getUser();
-  },[])
+  },[])  // eslint-disable-next-line react-hooks/exhaustive-deps
   if(!user){
     return null;
   }

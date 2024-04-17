@@ -51,8 +51,8 @@ const MyPostWidget = ({picturePath}) => {
         }
         const response = await fetch(`http://localhost:5152/posts`,{
             method:"POST",
-            header:{Authorization:`Bearer ${token}`},
-            body:formData
+            headers:{Authorization:`Bearer ${token}`},
+            body:formData,
     });
     const posts = await response.json();
     dispatch(setPosts({posts}));
