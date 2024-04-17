@@ -33,7 +33,7 @@ const UserWidget = ({ userId, picturePath }) => {
 
     const data = await response.json();
     setUser(data);
-    // console.log(user)
+    console.log(user)
 
 
   };
@@ -88,17 +88,17 @@ const UserWidget = ({ userId, picturePath }) => {
         <Divider />
 
         {/* {second row} */}
-        <Box p="1rem 0" >
-
-          <Box display="flex" alignItems="center" gap="1rem" mb="0.5rem">
-            <LocationOnOutlined fontSize="large" sx={{ color: main }} />
-            <Typography color={medium} >{location}</Typography>
-          </Box>
-          <Box display="flex" alignItems="center" gap="1rem" mb="0.5rem">
-            <WorkOutlineOutlined fontSize="large" sx={{ color: main }} />
-            <Typography color={medium} >{occupation}</Typography>
-          </Box>
+        <Box p="1rem 0">
+        <Box display="flex" alignItems="center" gap="1rem" mb="0.5rem">
+          <LocationOnOutlined fontSize="large" sx={{ color: main }} />
+          <Typography color={medium}>{location}</Typography>
         </Box>
+        <Box display="flex" alignItems="center" gap="1rem">
+          <WorkOutlineOutlined fontSize="large" sx={{ color: main }} />
+          <Typography color={medium}>{occupation}</Typography>
+        </Box>
+      </Box>
+
         <Divider />
 
         {/* third row */}

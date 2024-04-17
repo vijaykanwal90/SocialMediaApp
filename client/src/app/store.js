@@ -2,7 +2,7 @@ import {createSlice} from "@reduxjs/toolkit"
 
 const initialState= {
     mode:"light",
-    user:"null",
+    user:null,
     token:null,
     posts:[],
 };
@@ -26,7 +26,7 @@ export const authSlice = createSlice({
         setFriends:(state,action)=>{
             if(state.user){
                 state.user.friends = 
-                action.payload.firends;
+                action.payload.friends;
             }
             else {
                  console.log("user friends does not exits")

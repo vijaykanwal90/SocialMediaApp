@@ -43,7 +43,7 @@ export const getFeedPosts = async (req, res) => {
 
     }
 }
-
+console.log(getFeedPosts)
 export const getUserPosts = async (req, res) => {
     try {
 

@@ -1,31 +1,41 @@
-import React, { useEffect } from 'react'
+import React, { useState } from  'react'
 import { useEffect } from 'react'
 import {useDispatch,useSelector} from "react-redux"
 import MyPostWidget from './MyPostWidget'
 import PostWidget from './PostWidget'
+import {Box} from "@mui/material"
 import { setPosts } from '../../app/store'
 const PostsWidget = ({userId,isProfile =false}) => {
     const dispatch=useDispatch();
+    const[loading, setLoading] = useState(true)
     const posts = useSelector((state)=> state.posts);
     const token = useSelector((state)=>state.token)
-    const getPosts = async()=>{
-        const response = await fetch("http://localhost:5152/posts",{
-            method:"GET",
-            headers:{Authorization:`Bearer${token}`},
-    });
     
-        const data= await response.json();
-        console.log(data);
-        dispatch(setPosts({posts:data}));
-    }
+    const getPosts = async()=>{
+        try {
+            const response = await fetch('http://localhost:5152/posts', {
+                method: 'GET',
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            if (!response.ok) {
+                throw new Error('Failed to fetch posts');
+            }
+            const data = await response.json();
+            dispatch(setPosts({ posts: data }));
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setLoading(false);
+        }
+}
     const getUserPosts = async()=>{
         const response = await fetch(`http://localhost:5152/posts/${userId}/posts`,{
             method:"GET",
             headers:{Authorization:`Bearer${token}`},
     });
-    
+   
         const data= await response.json();
-        console.log(data)
+        // console.log(data.firstName)
         dispatch(setPosts({posts:data}));
     }
     useEffect(()=>{
@@ -39,7 +49,7 @@ const PostsWidget = ({userId,isProfile =false}) => {
     },[]);
   return (
    <>
-   {posts.map(
+   {/* { posts ?( posts.map(
     ({
     _id,
     userId,
@@ -67,8 +77,31 @@ const PostsWidget = ({userId,isProfile =false}) => {
 
 )
    
+   )
+
+   ):(
+<div>Loading...</div>
    )} 
-   
+    */}
+
+{Array.isArray(posts) ? (
+            posts.map(({ _id, userId, firstName, lastName, description, location, picturePath, likes, userPicturePath, comments }) => (
+                <PostWidget
+                    key={_id}
+                    postId={_id}
+                    postUserId={userId}
+                    name={`${firstName} ${lastName}`}
+                    description={description}
+                    location={location}
+                    picturePath={picturePath}
+                    likes={likes}
+                    userPicturePath={userPicturePath}
+                    comments={comments}
+                />
+            ))
+        ) : (
+            <Box>No posts available</Box>
+        )}
    </>
   );
 };

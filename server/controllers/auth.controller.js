@@ -13,6 +13,7 @@ export const register = async (req,res)=>{
             email,
             password,
             picturePath,
+            location,
             friends,
             occupation
         } = req.body;
@@ -26,6 +27,7 @@ export const register = async (req,res)=>{
             email,
             password:passwordHash,
             picturePath,
+            location,
             friends,
             occupation,
             viewedProfile: Math.floor(Math.random()* 1000),

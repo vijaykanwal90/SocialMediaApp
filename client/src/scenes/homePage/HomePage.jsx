@@ -3,7 +3,9 @@ import React from 'react'
 import Navbar from '../navbar/Navbar'
 import { useSelector } from 'react-redux';
 import UserWidget from '../widgets/UserWidget';
-import PostsWidget from '../widgets/PostWidget';
+import PostWidget from '../widgets/PostWidget';
+import PostsWidget from '../widgets/PostsWidget';
+
 import MyPostWidget from "../../scenes/widgets/MyPostWidget"
 import AdverWidget from '../widgets/AdvertWidget';
 import FriendListWidget from '../widgets/FriendListWidget';
