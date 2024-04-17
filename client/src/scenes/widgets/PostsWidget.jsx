@@ -21,6 +21,8 @@ const PostsWidget = ({userId,isProfile =false}) => {
                 throw new Error('Failed to fetch posts');
             }
             const data = await response.json();
+            // console.log(response)
+            // console.log(data)
             dispatch(setPosts({ posts: data }));
         } catch (error) {
             setError(error.message);

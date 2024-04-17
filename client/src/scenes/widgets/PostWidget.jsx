@@ -1,4 +1,5 @@
 import {
+    ChatBubbleOutlineOutlined,
     FavoriteBorderOutlined,
     
     ShareOutlined,
@@ -39,7 +40,8 @@ const PostWidget = ({
     const primary = palette.primary.main;
   
     const patchLike = async () => {
-        const response = await fetch(`http://localhost/5152/posts/${postId}/like`, {
+       
+        const response = await fetch(`http://localhost:5152/posts/${postId}/like`, {
             method: "PATCH",
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -47,7 +49,7 @@ const PostWidget = ({
             },
             body: JSON.stringify({ userId: "loggedInUserId" })
         });
-        // console.log(userPicturePath)
+        // console.log(patchLike)
         const updatedPost = await response.json();
         dispatch(setPost({ post: updatedPost }))
     };
@@ -93,15 +95,11 @@ const PostWidget = ({
                             {likeCount}
                         </Typography>
                     </FlexBetween>
+
+
                     <FlexBetween gap="0.3rem">
                     <IconButton onClick={()=>setIsComments(!isComments)}>
-                            {isLiked ? (
-                                <FavoriteBorderOutlined sx={{ color: primary }} />
-
-                            ) : (
-                                <FavoriteBorderOutlined />
-
-                            )}
+                            <ChatBubbleOutlineOutlined/>
                         </IconButton>
                         <Typography>{comments.length}</Typography>
                     </FlexBetween>
@@ -134,3 +132,12 @@ const PostWidget = ({
   
 }
 export default PostWidget;
+
+
+// {isLiked ? (
+//     <FavoriteBorderOutlined sx={{ color: primary }} />
+
+// ) : (
+//     <FavoriteBorderOutlined />
+
+// )}

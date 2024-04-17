@@ -23,12 +23,14 @@ const patchFriend = async()=>{
         {
             method:"PATCH",
             headers:{
-                Authorixation:`Bearer  ${token}`,
-                "Content-Type":"application/json",
+                Authorization:`Bearer  ${token}`,
+                "Content-type":"application/json",
             },
        }
     );
         const data = await response.json();
+        console.log(response)
+        console.log(data)
         dispatch(setFriends({friends:data}));
 }
         return (
