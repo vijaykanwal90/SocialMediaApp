@@ -133,11 +133,3 @@ const PostWidget = ({
 }
 export default PostWidget;
 
-
-// {isLiked ? (
-//     <FavoriteBorderOutlined sx={{ color: primary }} />
-
-// ) : (
-//     <FavoriteBorderOutlined />
-
-// )}
