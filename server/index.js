@@ -67,15 +67,15 @@ app.use("/users",userRoutes)
 app.use("/posts",postRoutes)
 // set up of mongoses
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 5434;
 console.log(PORT)
 mongoose.connect(process.env.MONGO_URL,{
     useNewUrlParser:true,
     useUnifiedTopology:true,
 }).then(()=>{
-    app.listen(process.env.PORT || 8000,()=>{
+    app.listen(PORT ,()=>{
         console.log(PORT)
-        console.log(`Server is running at port:${process.env.PORT}`);
+        console.log(`Server is running at port:${PORT}`);
     })
 })
 .catch((error)=>{
