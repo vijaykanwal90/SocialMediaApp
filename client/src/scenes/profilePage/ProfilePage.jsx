@@ -14,7 +14,7 @@ const ProfilePage = () => {
   const token = useSelector((state)=>state.token);
   const isNonMobileScreens = useMediaQuery("(min-width:1000px")
   const getUser= async()=>{
-    const response = await fetch(`https://social-media-app-one-lyart.vercel.app/users/${userId}`,{
+    const response = await fetch(`https://social-media-app-backend-blush.vercel.app/users/${userId}`,{
       method:"GET",
       headers:{
         Authorization:`Bearer ${token}`
