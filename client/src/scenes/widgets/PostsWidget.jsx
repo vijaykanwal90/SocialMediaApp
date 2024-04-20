@@ -14,7 +14,7 @@ const PostsWidget = ({userId,isProfile =false}) => {
 
     const getPosts = async()=>{
                 try {
-                    const response = await fetch('http://localhost:5152/posts', {
+                    const response = await fetch('https://social-media-app-one-lyart.vercel.app/posts', {
                         method: 'GET',
                         headers: { Authorization: `Bearer ${token}` },
                     });
@@ -32,15 +32,16 @@ const PostsWidget = ({userId,isProfile =false}) => {
                 }
         }
         const getUserPosts = async()=>{
-                    const response = await fetch(`http://localhost:5152/posts/${userId}/posts`,{
+                    const response = await fetch(`https://social-media-app-one-lyart.vercel.app/posts/${userId}/posts`,{
                         method:"GET",
-                        headers:{Authorization:`Bearer${token}`},
+                        headers:{Authorization:`Bearer ${token}`},
                 });
                
                     const data= await response.json();
-                    // console.log(data.firstName)
+                    console.log(response)
                     dispatch(setPosts({posts:data}));
                 }
+                
                 useEffect(()=>{
                             if(isProfile){
                                 getUserPosts();

@@ -70,7 +70,7 @@ const Form = () => {
     console.log(formData.name)
 
     const savedUserResponse = await fetch(
-      "http://localhost:5152/auth/register",
+      "https://social-media-app-one-lyart.vercel.app/auth/register",
       {
         method: "POST",
         body: formData,
@@ -89,7 +89,7 @@ const Form = () => {
 
   const login = async (values, onsubmitProps) => {
     const loggedInResponse = await fetch(
-      "http://localhost:5152/auth/login",
+      "https://social-media-app-one-lyart.vercel.app/login",
       {
         method: "POST",
         headers: { "content-Type": "application/json" },

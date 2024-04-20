@@ -8,7 +8,7 @@ const UserImage = ({image, size="60px"})=>{
         borderRadius:"50%"}}
         width={size}
         height={size}
-        src={`http://localhost:5152/assets/${image}`}
+        src={`https://social-media-app-one-lyart.vercel.app/assets/${image}`}
         />
         </Box>
     )

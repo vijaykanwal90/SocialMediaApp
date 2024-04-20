@@ -14,7 +14,7 @@ const ProfilePage = () => {
   const token = useSelector((state)=>state.token);
   const isNonMobileScreens = useMediaQuery("(min-width:1000px")
   const getUser= async()=>{
-    const response = await fetch(`http://localhost:5152/users/${userId}`,{
+    const response = await fetch(`https://social-media-app-one-lyart.vercel.app/users/${userId}`,{
       method:"GET",
       headers:{
         Authorization:`Bearer ${token}`
@@ -22,12 +22,15 @@ const ProfilePage = () => {
     })
     const data=await response.json();
     console.log(data)
+    
     setUser(data);
 
   }
   useEffect(()=>{
 getUser();
-  },[])  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])   // eslint-disable-line react-hooks/exhaustive-deps
+
+  
   if(!user){
     return null;
   }
@@ -49,7 +52,7 @@ getUser();
   <FriendListWidget userId={userId}/>
 </Box>
       <Box flexBasis={isNonMobileScreens ? "42%" :undefined}
-      mt={isNonMobileScreens ?undefined :"2rem"}
+      mt={isNonMobileScreens ? undefined :"2rem"}
       >
         <MyPostWidget picturePath={user.picturePath}/>
   <Box m="2rem 0"/>

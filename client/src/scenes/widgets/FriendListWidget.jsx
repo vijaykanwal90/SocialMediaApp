@@ -14,7 +14,7 @@ const token = useSelector((state)=>state.token)
 const friends = useSelector((state)=>state.user.friends);
 const getFriends = async()=>{
   
-    const response= await fetch(`http://localhost:5152/users/${userId}/friends`,{
+    const response= await fetch(`https://social-media-app-one-lyart.vercel.app/users/${userId}/friends`,{
         method:"GET",
         headers:{Authorization:`Bearer ${token}`},
     });
@@ -63,10 +63,5 @@ useEffect(()=>{
 
 export default FriendListWidget
 
-// {friends && friends.length > 0 ? (
-//   <Box display="flex "flexDirection="column" gap="1.5rem">
-//     {/* Map over friends here */}
-//   </Box>
-// ) : (
 
 
