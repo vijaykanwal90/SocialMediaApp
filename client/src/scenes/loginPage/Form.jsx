@@ -92,13 +92,20 @@ const Form = () => {
       "https://social-media-app-backend-blush.vercel.app/auth/register",
       {
         method: "POST",
-        headers: { "content-Type": "application/json" },
+        headers: { 
+          "origin":"*",
+          "methods":['GET','POST',
+        'PUT'],
+        allowedHeader:['Content-type','Authorization'],
+          "content-Type": "application/json" },
+          credentials:true,
+          optionsSuccessStatus:204,
 
         body: JSON.stringify(values),
       }
     )
     const loggedIn = await loggedInResponse.json();
-    console.log("hello in the response register")
+    // console.log("hello in the response register")
     onsubmitProps.resetForm();
     if (loggedIn) {
       dispatch(
