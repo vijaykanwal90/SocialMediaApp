@@ -37,7 +37,8 @@ app.use(bodyParser.json({limit:"30mb",extended:true}));
 app.use(bodyParser.urlencoded({limit:"30mb",extended:true}));
 app.use(cors({
     origin:'https://social-media-app-frontend-weld.vercel.app/',
-    credentials:true
+    credentials:true,
+    methods:['POST','GET','PATCH']
 }));
 app.use("/assets",express.static(path.join(__dirname,'public/assets')));
 
