@@ -98,7 +98,7 @@ const Form = () => {
         'PUT'],
         allowedHeader:['Content-type','Authorization'],
           "content-Type": "application/json" },
-          credentials:true,
+          
           optionsSuccessStatus:204,
 
         body: JSON.stringify(values),
