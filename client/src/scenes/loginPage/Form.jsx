@@ -70,7 +70,7 @@ const Form = () => {
     console.log(formData.name)
 
     const savedUserResponse = await fetch(
-      "https://social-media-app-backend-blush.vercel.app/auth/register",
+      "http://localhost:5152/auth/register",
       {
         method: "POST",
         body: formData,
@@ -89,7 +89,7 @@ const Form = () => {
 
   const login = async (values, onsubmitProps) => {
     const loggedInResponse = await fetch(
-      "https://social-media-app-backend-blush.vercel.app/login",
+      "http://localhost:5152/auth/login",
       {
         method: "POST",
         headers: { "content-Type": "application/json" },

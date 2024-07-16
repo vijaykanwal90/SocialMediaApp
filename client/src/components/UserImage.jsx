@@ -8,7 +8,7 @@ const UserImage = ({image, size="60px"})=>{
         borderRadius:"50%"}}
         width={size}
         height={size}
-        src={`https://social-media-app-backend-blush.vercel.app/assets/${image}`}
+        src={`http://localhost:5152/assets/${image}`}
         />
         </Box>
     )

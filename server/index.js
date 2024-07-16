@@ -36,7 +36,7 @@ app.use(morgan("command"));
 app.use(bodyParser.json({limit:"30mb",extended:true}));
 app.use(bodyParser.urlencoded({limit:"30mb",extended:true}));
 app.use(cors({
-    origin:'https://social-media-app-frontend-weld.vercel.app/',
+    origin:process.env.CORS_ORIGIN,
     credentials:true
 }));
 app.use("/assets",express.static(path.join(__dirname,'public/assets')));
@@ -68,10 +68,10 @@ app.use("/posts",postRoutes)
 // set up of mongoses
 
 const PORT = process.env.PORT || 5434;
-console.log(PORT)
+// console.log(PORT)
+console.log(process.env.MONGO_URL)
 mongoose.connect(process.env.MONGO_URL,{
-    useNewUrlParser:true,
-    useUnifiedTopology:true,
+  
 }).then(()=>{
     app.listen(PORT ,()=>{
         console.log(PORT)
@@ -79,5 +79,5 @@ mongoose.connect(process.env.MONGO_URL,{
     })
 })
 .catch((error)=>{
-    console.log("MongoDB connection failed ||", err);
+    console.log("MongoDB connection failed ||", error);
 })

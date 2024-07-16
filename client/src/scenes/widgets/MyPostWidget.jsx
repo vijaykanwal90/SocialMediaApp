@@ -49,7 +49,7 @@ const MyPostWidget = ({picturePath}) => {
             formData.append("picture",image);
             formData.append("picturePath",image.name);
         }
-        const response = await fetch(`https://social-media-app-backend-blush.vercel.app/posts`,{
+        const response = await fetch(`http://localhost:5152/posts`,{
             method:"POST",
             headers:{Authorization:`Bearer ${token}`},
             body:formData,

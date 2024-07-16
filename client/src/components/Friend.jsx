@@ -19,7 +19,7 @@ const Friend = ({friendId,name, subtitle, userPicturePath})=>{
     const isFriend = friends.find((friend)=>friend._id===friendId);
 const patchFriend = async()=>{
     const response = await fetch(
-        `https://social-media-app-backend-blush.vercel.app/users/${_id}/${friendId}`,
+        `http://localhost:5152/users/${_id}/${friendId}`,
         {
             method:"PATCH",
             headers:{
