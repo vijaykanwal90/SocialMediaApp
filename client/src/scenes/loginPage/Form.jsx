@@ -70,7 +70,11 @@ const Form = () => {
     console.log(formData.name)
 
     const savedUserResponse = await fetch(
+<<<<<<< HEAD
       "http://localhost:5152/auth/register",
+=======
+      "https://social-media-app-backend-blush.vercel.app/auth/login",
+>>>>>>> f9ba635257a11ce87ee89158f70c609aa6180bf7
       {
         method: "POST",
         body: formData,
@@ -89,15 +93,27 @@ const Form = () => {
 
   const login = async (values, onsubmitProps) => {
     const loggedInResponse = await fetch(
+<<<<<<< HEAD
       "http://localhost:5152/auth/login",
+=======
+      "https://social-media-app-backend-blush.vercel.app/auth/register",
+>>>>>>> f9ba635257a11ce87ee89158f70c609aa6180bf7
       {
         method: "POST",
-        headers: { "content-Type": "application/json" },
+        headers: { 
+          "origin":"*",
+          "methods":['GET','POST',
+        'PUT'],
+        allowedHeader:['Content-type','Authorization'],
+          "content-Type": "application/json" },
+          
+          optionsSuccessStatus:204,
 
         body: JSON.stringify(values),
       }
     )
     const loggedIn = await loggedInResponse.json();
+    // console.log("hello in the response register")
     onsubmitProps.resetForm();
     if (loggedIn) {
       dispatch(
