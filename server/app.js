@@ -2,10 +2,14 @@
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
-import dotenv from "dotenv"
+// import dotenv from "dotenv"
 import multer from "multer";
 import helmet from "helmet";
 import morgan from "morgan";
+import dotenv from "dotenv"
+// import mongoose from "mongoose";
+// import {app}  from "./app.js"
+
 import path from "path";
 import { fileURLToPath } from "url";
 // *** route imports ***
@@ -23,7 +27,12 @@ import {register} from "./controllers/auth.controller.js"
 import {createPost} from "./controllers/post.controller.js"
 // ***middleware import ***
 import { verifyToken } from "./middleware/auth.middleware.js";
+import connectDB from "./database/index.js";
 // configureation of midllewares
+
+dotenv.config({
+    path: './.env'
+})
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
@@ -35,10 +44,10 @@ app.use(morgan("command"));
 app.use(bodyParser.json({limit:"30mb",extended:true}));
 app.use(bodyParser.urlencoded({limit:"30mb",extended:true}));
 app.use(cors({
-    origin:'https://social-media-app-frontend-weld.vercel.app',
-    credentials:true
-    // methods:['POST','GET','PATCH']
+    origin : process.env.CORS_ORIGIN,
+    credentials : true
 }));
+
 app.use("/assets",express.static(path.join(__dirname,'public/assets')));
 
 
@@ -62,8 +71,7 @@ app.post("/auth/register",upload.single("picture"),register)
 app.post("/posts",verifyToken,upload.single("picture"),createPost);
 
 // routes
-app.use("/api/v1/auth",authRoutes)
-app.use("/api/v1/users",userRoutes)
+app.use("/auth",authRoutes)
+app.use("/users",userRoutes)
 app.use("/posts",postRoutes)
-
 export {app}

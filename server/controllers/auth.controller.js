@@ -38,7 +38,7 @@ export const register = async (req,res)=>{
         res.status(201).json(savedUser);
 
     } catch (error) {
-        res.status(500),json({error: error.message + "in the auth.controller"});
+        res.status(500).json({error: error.message + "in the auth.controller"});
     }
 }
 
@@ -58,7 +58,7 @@ export const login = async (req,res)=>{
         const isMatch = await bcrypt.compare(password, user.password) 
 
         if(!isMatch){
-            return res.status(400).json({msg:"credential does  no tm match"})
+            return res.status(400).json({msg:"credential does  not  match"})
         }
 
         const token = jwt.sign({id:user._id},process.env.JWT_SECRET)
@@ -66,6 +66,6 @@ export const login = async (req,res)=>{
         res.status(200).json({token , user})
         
     } catch (error) {
-        res.status(500).json({error : err.message})
+        res.status(500).json({error : error.message})
     }
 }
