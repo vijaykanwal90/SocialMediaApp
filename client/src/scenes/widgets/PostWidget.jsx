@@ -41,7 +41,7 @@ const PostWidget = ({
   
     const patchLike = async () => {
        
-        const response = await fetch(`http://localhost:5152/posts/${postId}/like`, {
+        const response = await fetch(`https://social-media-app-server-chi.vercel.app/posts/${postId}/like`, {
             method: "PATCH",
             headers: {
                 Authorization: `Bearer ${token}`,

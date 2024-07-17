@@ -14,7 +14,7 @@ const token = useSelector((state)=>state.token)
 const friends = useSelector((state)=>state.user.friends);
 const getFriends = async()=>{
   
-    const response= await fetch(`http://localhost:5152/users/${userId}/friends`,{
+    const response= await fetch(`https://social-media-app-server-chi.vercel.app/users/${userId}/friends`,{
         method:"GET",
         headers:{Authorization:`Bearer ${token}`},
     });
