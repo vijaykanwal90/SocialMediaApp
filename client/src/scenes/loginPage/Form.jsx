@@ -113,6 +113,10 @@ const Form = () => {
     console.log(savedUserResponse)
     console.log("saved user response print")
     const savedUser = await savedUserResponse.json();
+    console.log(savedUser)
+    if(!savedUser){
+      console.log("no saved user")
+    }
     onSubmitProps.resetForm();
 
     if (savedUser) {
