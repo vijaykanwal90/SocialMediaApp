@@ -89,7 +89,8 @@ const Form = () => {
   // };
   const register = async (values, onSubmitProps) => {
     // this allows us to send form info with image
-    console.log("error in registration ui")
+    console.log("error in registration ui");
+    console.log(values)
     const formData = new FormData();
     for (let value in values) {
       formData.append(value, values[value]);
