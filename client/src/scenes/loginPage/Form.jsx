@@ -102,6 +102,12 @@ const Form = () => {
       {
         method: "POST",
         body: formData,
+        headers: {
+          
+          
+      
+          
+        }
       }
     );
     console.log(savedUserResponse)
