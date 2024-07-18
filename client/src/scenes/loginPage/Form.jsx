@@ -104,7 +104,7 @@ const Form = () => {
         body: JSON.stringify(formData),
         headers: {
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin':https://social-media-app-frontend-henna.vercel.app,
+          // 'Access-Control-Allow-Origin': https://social-media-app-frontend-henna.vercel.app,
         },
     
       }
