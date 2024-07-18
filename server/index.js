@@ -33,7 +33,8 @@ app.use(cors({
 
 
 origin:process.env.CORS_ORIGIN ,
-Credentials:true
+Credentials:true,
+optionsSuccessStatus: 200
 }
 
 ));
