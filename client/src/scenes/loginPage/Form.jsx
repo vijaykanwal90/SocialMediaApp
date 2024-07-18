@@ -112,8 +112,11 @@ const Form = () => {
     console.log("saved user response print")
     const savedUser = await savedUserResponse.json();
     console.log(savedUser)
-    if(savedUser){
+    if(!savedUser){
       console.log("no saved user")
+    }
+    else {
+       console.log("saved user available")
     }
     onSubmitProps.resetForm();
 
