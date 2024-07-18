@@ -101,9 +101,9 @@ const Form = () => {
       "https://social-media-app-server-chi.vercel.app/auth/register",
       {
         method: "POST",
-        body: JSON.stringify(formData),
+        body: formData,
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'multipart/form-data',
           
         },
     
