@@ -103,11 +103,9 @@ const Form = () => {
         method: "POST",
         body: formData,
         headers: {
-          
-          
-      
-          
-        }
+          'Content-Type': 'application/json',
+        },
+    
       }
     );
     console.log(savedUserResponse)
