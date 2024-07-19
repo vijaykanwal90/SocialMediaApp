@@ -32,8 +32,8 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors({
 
 
-origin:process.env.CORS_ORIGIN ,
-Credentials:true,
+origin: 'https://social-media-app-frontend-henna.vercel.app',
+credentials:true,
 optionsSuccessStatus: 200
 }
 
