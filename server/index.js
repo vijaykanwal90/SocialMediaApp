@@ -29,15 +29,13 @@ app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-app.use(cors({
-
-
-origin: process.env.CORS_ORIGIN,
-credentials:true,
-optionsSuccessStatus: 200
-}
-
-));
+app.use(
+  cors({
+    origin: [process.env.FRONTEND_URL],
+    method: ["GET", "POST", "DELETE", "PUT"],
+    credentials: true,
+  }),
+);
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
 /* FILE STORAGE */
