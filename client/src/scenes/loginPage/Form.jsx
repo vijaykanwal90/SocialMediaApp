@@ -26,7 +26,7 @@ const registerSchema = yup.object().shape({
   password: yup.string().required("required"),
   location: yup.string().required("required"),
   occupation: yup.string().required("required"),
-  picture: yup.string().required("required"),
+  // picture: yup.string().required("required"),
 })
 
 const loginSchema = yup.object().shape({
@@ -41,7 +41,7 @@ const initialValuesRegister = {
   password: "",
   location: "",
   occupation: "",
-  picture: "",
+  // picture: "",
 
 }
 const initialValuesLogin = {
@@ -95,7 +95,7 @@ const Form = () => {
     for (let value in values) {
       formData.append(value, values[value]);
     }
-    formData.append("picturePath", values.picture.name);
+    // formData.append("picturePath", values.picture.name);
 
     const savedUserResponse = await fetch(
       "https://social-media-app-server-chi.vercel.app/auth/register",
@@ -231,7 +231,7 @@ const Form = () => {
                 borderRadius="5px"
                 p="1rem"
               >
-                <Dropzone
+                {/* <Dropzone
                   acceptedFiles=".jpg,.jpeg,.png"
                   multiple={false}
                   onDrop={(acceptedFiles) =>
@@ -256,7 +256,7 @@ const Form = () => {
                       )}
                     </Box>
                   )}
-                </Dropzone>
+                </Dropzone> */}
               </Box>
             </>
           )}
